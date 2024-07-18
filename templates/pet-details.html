@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pet Details</title>
+  </head>
+  <body>
+    <h1>{{pet.name}}</h1>
+    <img src="{{pet.photo_url}}" alt="" />
+    <h2>Details</h2>
+    <ul>
+      <li>Species: {{pet.species}}</li>
+      {% if pet.age %}
+      <li>Age: {{ pet.age }}</li>
+      {% endif %} {% if pet.notes %}
+      <li>Notes: {{ pet.notes }}</li>
+      {% endif %}
+    </ul>
+    <h2>Edit Pet</h2>
+    <!-- cant get this to submit a post request. spent many hours  -->
+    <form id="edit-pet-form" method="POST" action="/{{pet.id}}">
+      {{ form.hidden_tag() }}
+      <!--add type=hidden form fields -->
+      <p>
+        {{ form.photo_url.label }}<br />
+        {{ form.photo_url }} {% for error in form.photo_url.errors %} {{ error
+        }} {% endfor %}
+      </p>
+      <p>
+        {{ form.notes.label }}<br />
+        {{ form.notes }} {% for error in form.notes.errors %} {{ error }} {%
+        endfor %}
+      </p>
+      <p>
+        {{ form.available.label }}<br />
+        {{ form.available }} {% for error in form.available.errors %} {{ error
+        }} {% endfor %}
+      </p>
+      <button type="submit">Save Changes</button>
+    </form>
+  </body>
+</html>
